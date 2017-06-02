@@ -1,0 +1,38 @@
+plugins {
+    id 'net.ltgt.apt' version '0.10'
+}
+
+group 'fj'
+version '0.1-SNAPSHOT'
+
+apply plugin: "java"
+apply plugin: "idea"
+apply plugin: "net.ltgt.apt"
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+ext {
+    hktVersion = "0.9.3-SNAPSHOT"
+    derive4jVersion = "0.12.2"
+}
+
+dependencies {
+    apt "org.derive4j.hkt:hkt:" + hktVersion
+    apt "org.derive4j:derive4j:" + derive4jVersion
+
+    compileOnly "org.derive4j:derive4j-annotation:" + derive4jVersion
+
+    compile "org.derive4j.hkt:hkt:" + hktVersion
+
+    compile files("/usr/local/src/fj-typeclasses/build/libs/fj-typeclasses-0.1-SNAPSHOT.jar")
+
+    compile files("/usr/local/src/functionaljava/core/build/libs/functionaljava_1.8-4.8-SNAPSHOT.jar")
+
+    testCompile group: "junit", name: "junit", version: "4.12"
+}
